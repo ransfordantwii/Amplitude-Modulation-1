@@ -1,0 +1,29 @@
+% code for Orignal signal
+
+% --- 1. System Parameters ---
+fc = 10e3;  % Carrier Frequency (10 kHz)
+fs = 80e3;  % Sampling Frequency (80 kHz)
+t = (0:1/fs:0.01)'; % Time vector for 10ms duration
+
+% --- 2. Message Signal (s) ---
+% Create a two-tone sinusoidal signal with frequencies 300 and 600 Hz.
+s = sin(2*pi*300*t) + 2*sin(2*pi*600*t);
+
+% --- 3. Filter Design (Retained for completeness) ---
+[num,den] = butter(10, fc*2/fs);
+
+% --- 4. Modulation (Retained for completeness) ---
+y = ammod(s, fc, fs);
+
+% --- 5. Demodulation (Retained for completeness) ---
+z = amdemod(y, fc, fs, 0, 0, num, den);
+
+% --- 6. Plotting: Focus on Original Signal (s) ---
+figure;
+plot(t, s, 'r', 'LineWidth', 1.5);
+
+title('Original Two-Tone Message Signal (s)');
+xlabel('Time (s)');
+ylabel('Amplitude (Volts)');
+grid on;
+axis tight;
