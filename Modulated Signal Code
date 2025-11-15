@@ -1,0 +1,20 @@
+ % Code for Modulated signal
+fc = 10e3;  % Carrier Frequency (10 kHz)
+fs = 80e3;  % Sampling Frequency (80 kHz)
+t = (0:1/fs:0.01)'; % Time vector for 10ms duration
+
+% 1. Create the two-tone sinusoidal message signal (s)
+s = sin(2*pi*300*t) + 2*sin(2*pi*600*t);
+
+% 2. Amplitude modulate the signal (Standard AM)
+% y contains the high-frequency carrier modulated by s
+y = ammod(s, fc, fs);
+
+% 3. Plot only the Modulated Signal (y)
+figure;
+plot(t, y, 'r'); % Plot in red for visibility
+title('Time Domain Plot of Standard AM Modulated Signal');
+xlabel('Time (s)');
+ylabel('Amplitude (Volts)');
+grid on;
+axis tight;
